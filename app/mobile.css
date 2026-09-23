@@ -1,0 +1,202 @@
+@media (max-width: 700px) {
+  .shell {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .topbar .shell {
+    gap: 8px;
+    font-size: 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .topbar .location {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .masthead-row {
+    min-height: 66px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    font-size: 19px;
+  }
+
+  .brand-name {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+
+  .brand-name span {
+    max-width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .mast-actions {
+    gap: 6px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+  }
+
+  .nav .shell {
+    gap: 20px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+  }
+
+  .nav a {
+    font-size: 12px;
+    padding: 11px 0;
+  }
+
+  .ticker .shell {
+    gap: 10px;
+    min-height: 36px;
+  }
+
+  .ticker-label,
+  .ticker-track {
+    font-size: 10px;
+  }
+
+  .hero {
+    display: block;
+    padding-top: 18px;
+  }
+
+  .hero-main {
+    min-height: 360px;
+  }
+
+  .hero-copy {
+    padding: 18px 16px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(26px, 8vw, 36px);
+    line-height: 1.08;
+  }
+
+  .side-stories {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .story-row {
+    min-height: 82px;
+  }
+
+  .section-head {
+    gap: 10px;
+    margin-top: 34px;
+  }
+
+  .section-head h2 {
+    font-size: 24px;
+  }
+
+  .section-head a {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+  }
+
+  .card > img {
+    width: 112px;
+    height: 100%;
+    min-height: 150px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    min-width: 0;
+    padding: 13px;
+  }
+
+  .card-body h3 {
+    font-size: 17px;
+    line-height: 1.2;
+  }
+
+  .card-body p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  .read {
+    display: inline-block;
+    margin-top: 4px;
+    margin-right: 8px;
+    font-size: 11px;
+  }
+
+  .areas {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .areas a {
+    padding: 9px 5px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ad-slot,
+  .adsbygoogle {
+    min-height: 62px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1000px) {
+  .hero {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 16px;
+  }
+
+  .news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
