@@ -12,7 +12,7 @@ function Header() {
 }
 
 function Card({ story }) {
-  return <article className="card"><Image src={story.image} alt={story.title} width={800} height={500} unoptimized /><div className="card-body"><div className="kicker">{story.category} · {story.location}</div><Link href={`/news/${story.slug}`}><h3>{story.title}</h3></Link><p>{story.excerpt}</p><div className="meta">{story.publishedAt} · {story.views.toLocaleString('en-IN')} views</div><Link className="read" href={`/news/${story.slug}`}>Read full story →</Link></div></article>;
+  return <article className="card"><Image src={story.image} alt={story.title} width={800} height={500} unoptimized /><div className="card-body"><div className="kicker">{story.category} · {story.location}</div><Link href={`/news/${story.slug}`}><h3>{story.title}</h3></Link><p>{story.excerpt}</p><div className="meta">{story.publishedAt} · {story.views.toLocaleString('en-IN')} views · {story.author}</div><Link className="read" href={`/news/${story.slug}`}>Read full story →</Link>{story.sourceUrl && <a className="read" href={story.sourceUrl} target="_blank" rel="noreferrer">मूल खबर पढ़ें ↗</a>}</div></article>;
 }
 
 function AdSlot({ slot }) {
