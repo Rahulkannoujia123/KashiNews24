@@ -1,5 +1,4 @@
 import './globals.css';
-import Script from 'next/script';
 
 export const metadata = {
   metadataBase: new URL('https://kashilive24.in'),
@@ -11,5 +10,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-  return <html lang="hi"><body>{children}{adsenseClient && <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossOrigin="anonymous" />}</body></html>;
+
+  return (
+    <html lang="hi">
+      <head>
+        {adsenseClient ? (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
+      </head>
+      <body>{children}</body>
+    </html>
+  );
 }
