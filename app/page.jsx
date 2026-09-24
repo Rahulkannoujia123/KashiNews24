@@ -12,7 +12,7 @@ function Header() {
 }
 
 function Card({ story }) {
-  return <article className="card"><Image src={story.image} alt={story.title} width={800} height={500} unoptimized /><div className="card-body"><div className="kicker">{story.category} · {story.location}</div><Link href={`/news/${story.slug}`}><h3>{story.title}</h3></Link><p>{story.excerpt}</p><div className="meta">{story.publishedAt} · {story.views.toLocaleString('en-IN')} views · {story.author}</div><Link className="read" href={`/news/${story.slug}`}>Read full story →</Link>{story.sourceUrl && <a className="read" href={story.sourceUrl} target="_blank" rel="noreferrer">मूल खबर पढ़ें ↗</a>}</div></article>;
+  return <article className="card"><Image src={story.image} alt={story.title} width={800} height={500} unoptimized /><div className="card-body"><div className="kicker">{story.category} · {story.location}</div><Link href={`/news/${story.slug}`}><h3>{story.title}</h3></Link><p>{story.excerpt}</p><div className="meta">{story.publishedAt} · By {story.author}</div><Link className="read" href={`/news/${story.slug}`}>Read full story →</Link>{story.sourceUrl && <a className="read" href={story.sourceUrl} target="_blank" rel="noreferrer">मूल खबर पढ़ें ↗</a>}</div></article>;
 }
 
 function AdSlot({ slot }) {
@@ -27,9 +27,11 @@ function Footer() {
 export default async function Home({ searchParams }) {
   const requestedCategory = (await searchParams)?.category || '';
   const category = ['latest', 'local'].includes(requestedCategory.toLowerCase()) ? '' : requestedCategory;
-  const loadedStories = await fetchFreshStories(category);
-  const storyList = loadedStories.length ? loadedStories : await fetchFreshStories();
+  const storyList = await fetchFreshStories(category);
   const [lead, ...rest] = storyList;
+  if (!lead) {
+    return <><Header /><main><div className="shell"><div className="empty"><h1>{category || 'News'} में अभी कोई खबर उपलब्ध नहीं है</h1><p>कृपया बाद में फिर देखें।</p></div></div></main><Footer /></>;
+  }
 
   return <><Header /><main><div className="shell">
     <section className="hero"><Link href={`/news/${lead.slug}`} className="hero-main"><Image src={lead.image} alt={lead.title} fill priority unoptimized sizes="(max-width: 750px) 100vw, 65vw" /><div className="hero-copy"><div className="kicker">{lead.category} · Top story</div><h1>{lead.title}</h1><div className="meta">{lead.publishedAt} · By {lead.author}</div></div></Link><div className="side-stories">{rest.slice(0, 4).map((story) => <Link href={`/news/${story.slug}`} className="story-row" key={story.slug}><Image src={story.image} alt="" width={120} height={88} unoptimized /><div><div className="kicker">{story.category}</div><h3>{story.title}</h3><div className="meta">{story.publishedAt}</div></div></Link>)}</div></section>
