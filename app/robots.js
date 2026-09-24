@@ -1,1 +1,11 @@
-export default function robots(){return {rules:{userAgent:'*',allow:'/'},sitemap:'https://kashilive24.in/sitemap.xml'}}
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
+
+export default function robots() {
+  return {
+    rules: [
+      { userAgent: '*', allow: '/' }
+    ],
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl
+  };
+}

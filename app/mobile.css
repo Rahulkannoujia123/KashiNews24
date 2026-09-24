@@ -129,6 +129,10 @@
     grid-template-columns: 112px minmax(0, 1fr);
   }
 
+  .card:not(:has(> img)) {
+    display: block;
+  }
+
   .card > img {
     width: 112px;
     height: 100%;
