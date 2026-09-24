@@ -1,0 +1,155 @@
+/* Layout: two-column content + sidebar */
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 34px;
+  align-items: start;
+  margin-top: 26px;
+}
+
+/* Breadcrumbs */
+.crumbs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin: 18px 0 6px;
+}
+.crumbs a:hover { color: var(--red); }
+
+/* Page titles / section counts */
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 4px 0 14px;
+}
+.section-head .count,
+.count {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Article card refinements */
+.card-media { display: block; overflow: hidden; }
+.card-media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.card:hover .card-media img { transform: scale(1.04); }
+.card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+.card-body h3 a:hover { color: var(--red); }
+
+/* Sidebar */
+.sidebar { display: flex; flex-direction: column; gap: 22px; position: sticky; top: 16px; }
+.side-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 16px;
+}
+.side-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  margin: 0 0 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--red);
+}
+.rank-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.rank-list li { display: flex; gap: 12px; }
+.rank-list a { font-size: 14px; font-weight: 600; line-height: 1.35; display: block; }
+.rank-list a:hover { color: var(--red); }
+.rank-list .meta { display: block; margin-top: 4px; font-size: 11px; }
+.rank-num {
+  flex: 0 0 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  color: var(--red);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 15px;
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.chip:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* Article byline + source */
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 6px 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.byline strong { color: var(--ink); }
+.source-box {
+  background: var(--paper);
+  border-left: 3px solid var(--red);
+  padding: 12px 16px;
+  font-size: 14px;
+  margin: 20px 0;
+}
+.source-box a { color: var(--red); font-weight: 600; }
+
+/* Share buttons */
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0 20px; }
+.share-label { font-size: 13px; font-weight: 700; color: var(--muted); }
+.share button {
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 12px;
+}
+.share button:hover { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* Static / legal pages */
+.static-page { max-width: 820px; padding-top: 8px; padding-bottom: 40px; }
+.prose { font-size: 16px; line-height: 1.75; color: #33312e; }
+.prose h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  margin: 28px 0 10px;
+}
+.prose p { margin: 0 0 14px; }
+.prose ul { margin: 0 0 16px; padding-left: 20px; }
+.prose li { margin-bottom: 8px; }
+.prose a { color: var(--red); font-weight: 600; }
+.prose a:hover { text-decoration: underline; }
+
+/* Empty state */
+.empty {
+  background: var(--white);
+  border: 1px dashed var(--line);
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty .read { display: inline-block; margin-top: 12px; color: var(--red); font-weight: 700; }
+
+@media (max-width: 900px) {
+  .page-grid { grid-template-columns: 1fr; gap: 24px; }
+  .sidebar { position: static; }
+  .page-title { font-size: 24px; }
+}
