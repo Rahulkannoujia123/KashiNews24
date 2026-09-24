@@ -27,11 +27,17 @@ export default async function Article({ params }) {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
     headline: story.title,
+    description: story.excerpt,
     image: [story.image],
-    datePublished: '2026-09-23T09:42:00+05:30',
-    dateModified: '2026-09-23T09:42:00+05:30',
+    datePublished: story.publishedAt,
+    dateModified: story.publishedAt,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://kashilive24.in/news/${story.slug}` },
     author: { '@type': 'Person', name: story.author },
-    publisher: { '@type': 'Organization', name: 'Kashi Live 24' }
+    publisher: {
+      '@type': 'Organization',
+      name: 'Kashi Live 24',
+      url: 'https://kashilive24.in'
+    }
   };
 
   return (
@@ -59,7 +65,8 @@ export default async function Article({ params }) {
           <h1>{story.title}</h1>
           <p className="article-lead">{story.excerpt}</p>
           <div className="meta">
-            By <strong>{story.author}</strong> · Published {story.publishedAt} · Updated just now
+            By <strong>{story.author}</strong> · Published {story.publishedAt}
+            {story.sourceUrl && <> · <a href={story.sourceUrl} target="_blank" rel="noopener noreferrer">Source</a></>}
           </div>
 
           <Image className="article-image" src={story.image} alt={story.title} width={1200} height={700} priority unoptimized />
@@ -72,13 +79,13 @@ export default async function Article({ params }) {
 
           <div className="article-content">
             <p>
-              {story.excerpt} Kashi Live 24 ki ground reporting aur official public information ke aadhar par yeh update aap tak pahunchaya ja raha hai.
+              {story.excerpt}
             </p>
             <p>
-              Shehar mein taiyari aur vyavastha ko lekar sambandhit vibhaagon ne zaroori nirdesh jaari kiye hain. Nagrikon se appeal hai ki official advisories ka paalan karein aur kisi bhi unverified message ko share na karein.
+              Is khabar se judi jankari ko sambandhit official/public sources se verify karke hi publish kiya gaya hai. Readers ko kisi bhi unverified message ko share karne se bachna chahiye.
             </p>
             <p>
-              <strong>Source:</strong> Kashi Live 24 reporting and official public information. External information is clearly attributed where applicable.
+              <strong>Source:</strong> {story.sourceUrl ? <a href={story.sourceUrl} target="_blank" rel="noopener noreferrer">Original source</a> : 'Kashi Live 24 reporting / public information'}.
             </p>
           </div>
 
