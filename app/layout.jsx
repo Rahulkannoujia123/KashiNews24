@@ -20,7 +20,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || 'ca-pub-3384811402018637';
   const siteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -37,11 +37,14 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="hi">
+      <head>
+        <meta name="google-adsense-account" content={adsenseClient} />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema).replace(/</g, '\u003c') }} />
         <AutoRefresh />
         {children}
-        {adsenseClient ? <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossOrigin="anonymous" /> : null}
+        <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossOrigin="anonymous" />
       </body>
     </html>
   );
