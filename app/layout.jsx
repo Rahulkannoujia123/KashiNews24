@@ -9,18 +9,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-
   return (
     <html lang="hi">
       <head>
-        {adsenseClient ? (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-            crossOrigin="anonymous"
-          />
-        ) : null}
+        <meta name="google-adsense-account" content="ca-pub-3384811402018637" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3384811402018637"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>{children}</body>
     </html>
