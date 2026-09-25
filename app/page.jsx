@@ -103,6 +103,17 @@ function StorySection({ title, category, stories }) {
   );
 }
 
+function MobileBottomNav() {
+  return (
+    <nav className="mobile-bottom-nav" aria-label="Mobile quick navigation">
+      <Link href="/" className="mobile-nav-item">होम</Link>
+      <Link href={toCategoryRoute('Varanasi')} className="mobile-nav-item">वाराणसी</Link>
+      <Link href="/search" className="mobile-nav-item">खोज</Link>
+      <Link href="/send-news" className="mobile-nav-item">भेजें</Link>
+    </nav>
+  );
+}
+
 function Footer() {
   return (
     <footer className="footer">
@@ -136,15 +147,19 @@ export default async function Home({ searchParams }) {
   const contentStories = storyList.filter((story) => !tickerSlugs.has(story.slug));
   const featuredStory = contentStories.find((story) => story.image);
   const secondaryStories = contentStories.filter((story) => story.image && story.slug !== featuredStory?.slug).slice(0, 4);
-  const latestStories = contentStories.slice(0, 6);
+  const heroSlugs = new Set([featuredStory?.slug, ...secondaryStories.map((story) => story.slug)].filter(Boolean));
+  const remainingStories = contentStories.filter((story) => !heroSlugs.has(story.slug));
+  const localHighlights = remainingStories.slice(0, 3);
+  const latestStories = remainingStories.slice(3, 9);
+  const sectionStories = remainingStories.slice(9);
   const categorySections = CATEGORY_OPTIONS.filter((item) => item !== 'Varanasi' && item !== 'Kashi');
-  const localHighlights = contentStories.slice(0, 3);
   const quickCategories = ['Varanasi', 'Kashi', 'Politics', 'Crime', 'Education', 'Sports'];
 
   return (
     <>
       <Header />
       <BreakingTicker stories={storyList} />
+      <MobileBottomNav />
       <main className="page-shell">
         <div className="shell page-body">
           <div className="content-column">
@@ -239,10 +254,10 @@ export default async function Home({ searchParams }) {
             ) : (
               <>
                 <StorySection title="ताज़ा खबरें" stories={latestStories} />
-                <StorySection title="वाराणसी खबरें" category="Varanasi" stories={contentStories.filter((story) => story.category === 'Varanasi')} />
-                <StorySection title="काशी खबरें" category="Kashi" stories={contentStories.filter((story) => story.category === 'Kashi')} />
+                <StorySection title="वाराणसी खबरें" category="Varanasi" stories={sectionStories.filter((story) => story.category === 'Varanasi')} />
+                <StorySection title="काशी खबरें" category="Kashi" stories={sectionStories.filter((story) => story.category === 'Kashi')} />
                 {categorySections.map((sectionCategory) => (
-                  <StorySection key={sectionCategory} title={`${categoryLabel(sectionCategory)} खबरें`} category={sectionCategory} stories={contentStories.filter((story) => story.category === sectionCategory)} />
+                  <StorySection key={sectionCategory} title={`${categoryLabel(sectionCategory)} खबरें`} category={sectionCategory} stories={sectionStories.filter((story) => story.category === sectionCategory)} />
                 ))}
               </>
             )}
@@ -257,8 +272,8 @@ export default async function Home({ searchParams }) {
                 <AdSlot label="Sidebar" />
               </div>
               <div className="sidebar-block">
-                <h3>सबसे ज्यादा पढ़ी गई</h3>
-                {contentStories.slice(0, 4).map((story, index) => (
+                <h3>प्रमुख खबरें</h3>
+                {remainingStories.slice(0, 4).map((story, index) => (
                   <Link href={`/news/${story.slug}`} key={story.slug} className="sidebar-item">
                     <span className="sidebar-rank">{index + 1}</span>
                     <div>
