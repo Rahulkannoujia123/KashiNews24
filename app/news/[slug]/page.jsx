@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ShareButtons from './ShareButtons';
 import { categoryLabel, fetchFreshStories, getStory, toCategoryRoute } from '../../../lib/news';
 import { findArchivedStory } from '../../../lib/archive';
+import { JsonLd, createBreadcrumbSchema } from '../../../components/JsonLd';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
 
@@ -43,7 +44,12 @@ export default async function Article({params}){
   const canonical=siteUrl+'/news/'+story.slug;
   const schema={'@context':'https://schema.org','@type':'NewsArticle',headline:story.title,description:story.excerpt,...(story.image?{image:[story.image]}:{}),articleSection:categoryLabel(story.category),keywords:story.tags||[],author:{'@type':'Organization',name:story.isOriginal?'Kashi Live News 24':(story.authorName||story.source||'External publisher')},publisher:{'@type':'Organization',name:'Kashi Live News 24',url:siteUrl},mainEntityOfPage:canonical,isAccessibleForFree:true,...(story.publishedAtISO?{datePublished:story.publishedAtISO,dateModified:story.updatedAtISO||story.publishedAtISO}:{})};
   return <>
-    <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,'\\u003c')}}/>
+    <JsonLd data={schema} id="article-jsonld"/>
+    <JsonLd data={createBreadcrumbSchema([
+      { name: 'होम', url: siteUrl },
+      { name: categoryLabel(story.category), url: siteUrl + toCategoryRoute(story.category) },
+      { name: story.title, url: canonical }
+    ])} id="article-breadcrumb-jsonld"/>
     <SiteHeader stories={stories}/>
     <main className="page-shell"><div className="shell article-layout">
       <article className="article-page">
