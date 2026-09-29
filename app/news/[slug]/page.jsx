@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import ShareButtons from './ShareButtons';
-import { categoryLabel, fetchFreshStories, getStory, toCategoryRoute } from '../../../lib/news';\nimport { findArchivedStory } from '../../../lib/archive';
+import { categoryLabel, fetchFreshStories, getStory, toCategoryRoute } from '../../../lib/news';
+import { findArchivedStory } from '../../../lib/archive';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
 
