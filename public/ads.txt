@@ -1,1 +1,3 @@
+# Google AdSense
+# Publisher: pub-3384811402018637
 google.com, pub-3384811402018637, DIRECT, f08c47fec0942fa0
