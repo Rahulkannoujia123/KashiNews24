@@ -56,7 +56,7 @@ function Footer() {
   return <footer className="footer"><div className="shell footer-grid">
     <div><div className="brand-name">KASHI LIVE NEWS 24<span>VARANASI | KASHI | BANARAS</span></div><p>वाराणसी, काशी और बनारस की स्थानीय खबरें और जन-सूचनाएं।</p></div>
     <div><h4>श्रेणियां</h4><p>{['Varanasi','Kashi','Crime','Politics','Education','Sports','Jobs','Health'].map(c=><span key={c}><Link href={toCategoryRoute(c)}>{categoryLabel(c)}</Link><br/></span>)}</p></div>
-    <div><h4>जानकारी</h4><p><Link href="/about">हमारे बारे में</Link><br/><Link href="/contact">संपर्क</Link><br/><Link href="/editorial-policy">संपादकीय नीति</Link><br/><Link href="/correction-policy">सुधार नीति</Link><br/><Link href="/privacy-policy">गोपनीयता</Link><br/><Link href="/advertise">विज्ञापन</Link><br/><Link href="/send-news">हमें खबर भेजें</Link><br/><Link href="/archive">न्यूज़ आर्काइव</Link></p></div>
+    <div><h4>जानकारी</h4><p><Link href="/about">हमारे बारे में</Link><br/><Link href="/contact">संपर्क</Link><br/><Link href="/editorial-policy">संपादकीय नीति</Link><br/><Link href="/correction-policy">सुधार नीति</Link><br/><Link href="/privacy-policy">गोपनीयता</Link><br/><Link href="/disclaimer">अस्वीकरण</Link><br/><Link href="/terms">नियम व शर्तें</Link><br/><Link href="/advertise">विज्ञापन</Link><br/><Link href="/send-news">हमें खबर भेजें</Link><br/><Link href="/archive">न्यूज़ आर्काइव</Link></p></div>
   </div></footer>;
 }
 
