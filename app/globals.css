@@ -287,3 +287,37 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .card .read { display: inline-block; margin-top: 10px; }
 .primary { text-decoration: none; }
 @media (max-width: 700px) { .hero-copy p { font-size: 13px; } .hero-copy h1 { font-size: 1.8rem; } }
+
+
+.social-follow {
+  width: min(1180px, calc(100% - 32px));
+  margin: 28px auto 0;
+  padding: 24px;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 16px;
+  background: var(--surface, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.social-follow h3 { margin: 4px 0 6px; }
+.social-follow p { margin: 0; max-width: 680px; }
+.social-follow-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.social-follow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 1px solid rgba(0,0,0,.12);
+  white-space: nowrap;
+}
+.social-follow-btn.facebook { background: #1877f2; color: #fff; border-color: #1877f2; }
+.social-follow-btn.instagram { background: #fff; color: #111; }
+@media (max-width: 700px) {
+  .social-follow { width: calc(100% - 24px); margin-top: 20px; padding: 18px; align-items: stretch; flex-direction: column; }
+  .social-follow-actions { display: grid; grid-template-columns: 1fr 1fr; }
+}
