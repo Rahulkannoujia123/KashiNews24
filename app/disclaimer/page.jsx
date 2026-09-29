@@ -1,10 +1,12 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 export const metadata = {
   title: 'अस्वीकरण',
   description: 'Kashi Live News 24 का समाचार और बाहरी स्रोत संबंधी अस्वीकरण।'
 };
 
 export default function DisclaimerPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/disclaimer', name: 'अस्वीकरण | Kashi Live News 24', description: 'Kashi Live News 24 का समाचार और बाहरी स्रोत संबंधी अस्वीकरण।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Disclaimer</div>
     <h1>अस्वीकरण</h1>
     <p className="article-lead">Kashi Live News 24 पर प्रकाशित जानकारी सामान्य समाचार और सूचना के उद्देश्य से उपलब्ध कराई जाती है।</p>
