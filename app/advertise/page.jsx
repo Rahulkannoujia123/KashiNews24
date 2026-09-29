@@ -1,10 +1,12 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 export const metadata = {
   title: 'विज्ञापन',
   description: 'Kashi Live News 24 पर विज्ञापन और स्थानीय प्रचार संबंधी जानकारी।'
 };
 
 export default function AdvertisePage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/advertise', name: 'विज्ञापन | Kashi Live News 24', description: 'Kashi Live News 24 पर विज्ञापन और स्थानीय प्रचार संबंधी जानकारी।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Advertising</div>
     <h1>विज्ञापन</h1>
     <p className="article-lead">Kashi Live News 24 पर वाराणसी और आसपास के स्थानीय व्यवसायों तथा सेवाओं के लिए विज्ञापन विकल्प उपलब्ध कराए जा सकते हैं।</p>
