@@ -96,13 +96,13 @@ export default async function Home() {
 
           <section className="story-section">
             <div className="section-head"><h2>वाराणसी के इलाके</h2><span>लोकल कवरेज</span></div>
-            <div className="chip-list">{areas.map(a=><Link key={a} href={`/?location=${encodeURIComponent(a)}`} className="chip">{a}</Link>)}</div>
+            <div className="chip-list">{areas.map(a=><Link key={a} href={`/location/${String(a).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}`} className="chip">{a}</Link>)}</div>
           </section>
 
           <Section title="वाराणसी खबरें" category="Varanasi" stories={stories.filter(s=>s.category==='Varanasi')}/>
 
           {socialFeeds.length > 0 && <section className="story-section social-section">
-            <div className="section-head"><h2>सोशल मीडिया अपडेट</h2><span>Facebook · Reels</span></div>
+            <div className="section-head"><h2>सोशल मीडिया अपडेट</h2><Link href="/social">सभी देखें →</Link></div>
             <div className="news-grid">
               {socialFeeds.slice(0, 6).map(item => <article className="card social-card" key={item.id}>
                 {item.image ? <a href={item.sourceUrl || '#'} target="_blank" rel="noreferrer">
