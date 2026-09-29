@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchFreshStories } from '../../lib/news';
+import { fetchFreshStories } from '../../lib/news';\nimport { searchArchivedStories } from '../../lib/archive';
 
 export const metadata = { title: 'खबरें खोजें', description: 'शीर्षक, श्रेणी, कीवर्ड या स्थान से Kashi Live News 24 की खबरें खोजें।' };
 
@@ -9,10 +9,15 @@ export default async function SearchPage({ searchParams }) {
   const query = String(params?.q || '').trim().slice(0, 100);
   const term = query.toLocaleLowerCase('hi-IN');
   const stories = await fetchFreshStories();
-  const results = term ? stories.filter((story) =>
+  const archived = term ? await searchArchivedStories(query, 80) : [];
+  const liveResults = term ? stories.filter((story) =>
     [story.title, story.excerpt, story.category, story.location, ...(story.tags || [])]
       .filter(Boolean).join(' ').toLocaleLowerCase('hi-IN').includes(term)
   ) : [];
+  const bySlug = new Map([...archived, ...liveResults].map((story) => [story.slug, story]));
+  const results = [...bySlug.values()].sort((a, b) =>
+    new Date(b.publishedAtISO || 0).getTime() - new Date(a.publishedAtISO || 0).getTime()
+  );
 
   return (
     <>
