@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { fetchFreshStories } from '../../lib/news';
 import { searchArchivedStories } from '../../lib/archive';
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 
 export const metadata = { title: 'खबरें खोजें', description: 'शीर्षक, श्रेणी, कीवर्ड या स्थान से Kashi Live News 24 की खबरें खोजें।' };
 
@@ -16,12 +17,19 @@ export default async function SearchPage({ searchParams }) {
       .filter(Boolean).join(' ').toLocaleLowerCase('hi-IN').includes(term)
   ) : [];
   const bySlug = new Map([...archived, ...liveResults].map((story) => [story.slug, story]));
+  const pageSchema = createWebPageSchema({
+    url: 'https://kashi-livenews24.vercel.app/search' + (query ? `?q=${encodeURIComponent(query)}` : ''),
+    name: query ? `“${query}” खोज परिणाम | Kashi Live News 24` : 'खबरें खोजें | Kashi Live News 24',
+    description: 'शीर्षक, श्रेणी, कीवर्ड या स्थान से Kashi Live News 24 की खबरें खोजें।',
+    type: 'SearchResultsPage'
+  });
+
   const results = [...bySlug.values()].sort((a, b) =>
     new Date(b.publishedAtISO || 0).getTime() - new Date(a.publishedAtISO || 0).getTime()
   );
 
   return (
-    <>
+    <><JsonLd data={pageSchema} id="search-jsonld"/>
       <header className="masthead">
         <div className="shell masthead-row">
           <Link href="/" className="brand">
