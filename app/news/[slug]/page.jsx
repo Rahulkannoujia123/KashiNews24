@@ -20,7 +20,8 @@ function SiteHeader({ stories }) {
 
 export async function generateMetadata({ params }) {
   const stories=await fetchFreshStories();
-  const story=getStory((await params).slug,stories);
+  let story=await findArchivedStory((await params).slug);
+  if(!story) story=getStory((await params).slug,stories);
   if(!story) return {title:'खबर उपलब्ध नहीं',robots:{index:false,follow:false}};
   return {
     title:story.seoTitle||story.title,
@@ -34,7 +35,8 @@ export async function generateMetadata({ params }) {
 
 export default async function Article({params}){
   const stories=await fetchFreshStories();
-  const story=getStory((await params).slug,stories);
+  let story=await findArchivedStory((await params).slug);
+  if(!story) story=getStory((await params).slug,stories);
   if(!story) notFound();
   const related=stories.filter(s=>s.slug!==story.slug&&(s.category===story.category||s.location===story.location)).slice(0,4);
   const latest=stories.filter(s=>s.slug!==story.slug).slice(0,7);
@@ -50,8 +52,15 @@ export default async function Article({params}){
         {story.image?<Image className="article-image" src={story.image} alt={story.imageAlt||story.title} width={1200} height={700} priority sizes="(max-width: 768px) 100vw, 1000px"/>:null}
         <ShareButtons title={story.title} url={canonical}/>
         <div className="article-content">
+          <p className="article-summary-label">स्रोत आधारित सारांश</p>
           <p>{story.content||story.excerpt}</p>
-          {!story.isOriginal&&<div className="source-note"><strong>स्रोत सूचना:</strong> यह खबर बाहरी प्रकाशक से प्राप्त/संकलित जानकारी पर आधारित है। हमारी साइट इसे उपलब्ध स्रोत और स्थानीय संदर्भ के साथ प्रस्तुत करती है। पूरी रिपोर्ट के लिए मूल स्रोत देखें।</div>}
+          <div className="article-facts">
+            <div><strong>श्रेणी:</strong> {categoryLabel(story.category)}</div>
+            <div><strong>स्थान:</strong> {story.location==='Varanasi'?'वाराणसी':story.location||'वाराणसी'}</div>
+            <div><strong>स्रोत:</strong> {story.source||'बाहरी प्रकाशक'}</div>
+            {story.publishedAt?<div><strong>प्रकाशित:</strong> {story.publishedAt}</div>:null}
+          </div>
+          {!story.isOriginal&&<div className="source-note"><strong>संपादकीय सूचना:</strong> यह पेज उपलब्ध बाहरी स्रोत की जानकारी का सारांश है। बिना स्वतंत्र सत्यापन के नए तथ्य या दावे नहीं जोड़े गए हैं। पूरी रिपोर्ट और संदर्भ के लिए मूल स्रोत देखें।</div>}
           {story.sourceUrl?<p className="article-source-link"><a href={story.sourceUrl} target="_blank" rel="noopener noreferrer">मूल स्रोत पढ़ें ↗</a></p>:null}
         </div>
         {related.length>0&&<section className="story-section"><div className="section-head"><h2>संबंधित खबरें</h2></div><div className="news-grid">{related.map(item=><article className="card" key={item.slug}>{item.image?<Image src={item.image} alt={item.imageAlt||item.title} width={600} height={350} sizes="(max-width:768px) 100vw, 33vw"/>:null}<div className="card-body"><div className="kicker">{categoryLabel(item.category)}</div><Link href={'/news/'+item.slug}><h3>{item.title}</h3></Link><div className="meta">{item.publishedAt}</div></div></article>)}</div></section>}
