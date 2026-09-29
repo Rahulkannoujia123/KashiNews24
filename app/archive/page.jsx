@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { listArchivedStories } from '../../lib/archive';
 import { categoryLabel, CATEGORY_OPTIONS } from '../../lib/news';
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 
 export const metadata = {
   title: 'न्यूज़ आर्काइव | Kashi Live News 24',
@@ -14,9 +15,15 @@ export default async function ArchivePage({ searchParams }) {
   const pageNumber = Math.max(Number(params?.page || 1), 1);
   const { items, total } = await listArchivedStories({ category, page: pageNumber, limit: 24 });
   const pages = Math.max(Math.ceil(total / 24), 1);
+  const pageSchema = createWebPageSchema({
+    url: 'https://kashi-livenews24.vercel.app/archive',
+    name: 'न्यूज़ आर्काइव | Kashi Live News 24',
+    description: 'वाराणसी, काशी और बनारस की पुरानी एवं ताज़ा खबरों का न्यूज़ आर्काइव।',
+    type: 'CollectionPage'
+  });
 
   return (
-    <>
+    <><JsonLd data={pageSchema} id="archive-jsonld"/>
       <header className="masthead">
         <div className="shell masthead-row">
           <Link href="/" className="brand">
