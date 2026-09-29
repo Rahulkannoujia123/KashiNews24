@@ -1,10 +1,12 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 export const metadata = {
   title: 'सुधार नीति',
   description: 'Kashi Live News 24 पर तथ्यात्मक त्रुटियों के सुधार की नीति।'
 };
 
 export default function CorrectionPolicyPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/correction-policy', name: 'सुधार नीति | Kashi Live News 24', description: 'Kashi Live News 24 पर तथ्यात्मक त्रुटियों के सुधार की नीति।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Corrections</div>
     <h1>सुधार नीति</h1>
     <p className="article-lead">हम तथ्यात्मक गलतियों की सूचना मिलने पर उन्हें जांचने और आवश्यक सुधार करने का प्रयास करते हैं।</p>
