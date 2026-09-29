@@ -30,5 +30,5 @@ export default async function InformationPage({ params }) {
     name: `${titles[page] || page} | Kashi Live News 24`,
     description: 'Kashi Live News 24 की हिंदी जानकारी और नीतियां।'
   });
-  return <><JsonLd data={pageSchema} id="dynamic-info-page-jsonld"/><InfoPage slug={page} />;
+  return <><JsonLd data={pageSchema} id="dynamic-info-page-jsonld"/><InfoPage slug={page} /></>;
 }
