@@ -34,7 +34,7 @@ export default function SendNews() {
   }
 
   if (state.success) {
-    return <><JsonLd data={pageSchema} id="send-news-jsonld"/><JsonLd data={pageSchema} id="send-news-jsonld"/><main><div className="shell form-page">
+    return <><JsonLd data={pageSchema} id="send-news-jsonld"/><main><div className="shell form-page">
       <div className="kicker">खबर प्राप्त हुई</div>
       <h1>धन्यवाद, आपकी खबर मिल गई।</h1>
       <p className="article-lead">आपकी जानकारी अभी प्रकाशित नहीं होगी। पहले हमारी संपादकीय टीम तथ्य और स्रोत की जांच करेगी।</p>
@@ -42,7 +42,7 @@ export default function SendNews() {
     </div></main>;
   }
 
-  return <>
+  return <><JsonLd data={pageSchema} id="send-news-jsonld"/>
     <div className="masthead"><div className="shell masthead-row">
       <Link href="/" className="brand"><div className="brand-mark">क</div><div className="brand-name">Kashi Live 24<span>कम्युनिटी न्यूज़ डेस्क</span></div></Link>
     </div></div>
