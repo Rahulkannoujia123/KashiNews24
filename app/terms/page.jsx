@@ -1,10 +1,12 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 export const metadata = {
   title: 'नियम एवं शर्तें',
   description: 'Kashi Live News 24 की वेबसाइट उपयोग की सामान्य शर्तें।'
 };
 
 export default function TermsPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/terms', name: 'नियम एवं शर्तें | Kashi Live News 24', description: 'Kashi Live News 24 की वेबसाइट उपयोग की सामान्य शर्तें।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Terms</div>
     <h1>नियम एवं शर्तें</h1>
     <p className="article-lead">Kashi Live News 24 का उपयोग करते समय इन सामान्य शर्तों का पालन करें।</p>
