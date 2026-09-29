@@ -8,7 +8,8 @@ export default async function sitemap() {
   const now = new Date();
   return [
     { url: siteUrl, lastModified: now },
-    { url: `${siteUrl}/search`, lastModified: now },\n    { url: `${siteUrl}/archive`, lastModified: now },
+    { url: `${siteUrl}/search`, lastModified: now },
+    { url: `${siteUrl}/archive`, lastModified: now },
     { url: `${siteUrl}/social`, lastModified: now },
     ...['about','contact','privacy-policy','terms','disclaimer','editorial-policy','correction-policy','advertise'].map((path) => ({ url: `${siteUrl}/${path}`, lastModified: now })),
     ...CATEGORY_OPTIONS.map((category) => ({ url: `${siteUrl}/category/${slugify(category)}`, lastModified: now })),
