@@ -51,7 +51,7 @@ export default async function Article({params}){
         <ShareButtons title={story.title} url={canonical}/>
         <div className="article-content">
           <p>{story.content||story.excerpt}</p>
-          {!story.isOriginal&&<div className="source-note"><strong>स्रोत सूचना:</strong> यह खबर बाहरी प्रकाशक से प्राप्त/संकलित जानकारी पर आधारित है। पूरी रिपोर्ट के लिए मूल स्रोत देखें।</div>}
+          {!story.isOriginal&&<div className="source-note"><strong>स्रोत सूचना:</strong> यह खबर बाहरी प्रकाशक से प्राप्त/संकलित जानकारी पर आधारित है। हमारी साइट इसे उपलब्ध स्रोत और स्थानीय संदर्भ के साथ प्रस्तुत करती है। पूरी रिपोर्ट के लिए मूल स्रोत देखें।</div>}
           {story.sourceUrl?<p className="article-source-link"><a href={story.sourceUrl} target="_blank" rel="noopener noreferrer">मूल स्रोत पढ़ें ↗</a></p>:null}
         </div>
         {related.length>0&&<section className="story-section"><div className="section-head"><h2>संबंधित खबरें</h2></div><div className="news-grid">{related.map(item=><article className="card" key={item.slug}>{item.image?<Image src={item.image} alt={item.imageAlt||item.title} width={600} height={350} sizes="(max-width:768px) 100vw, 33vw"/>:null}<div className="card-body"><div className="kicker">{categoryLabel(item.category)}</div><Link href={'/news/'+item.slug}><h3>{item.title}</h3></Link><div className="meta">{item.publishedAt}</div></div></article>)}</div></section>}
