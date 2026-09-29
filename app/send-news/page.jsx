@@ -2,8 +2,15 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 
 export default function SendNews() {
+  const pageSchema = createWebPageSchema({
+    url: 'https://kashi-livenews24.vercel.app/send-news',
+    name: 'हमें खबर भेजें | Kashi Live News 24',
+    description: 'वाराणसी की खबर, फोटो, वीडियो या स्थानीय सूचना संपादकीय समीक्षा के लिए भेजें।',
+    type: 'ContactPage'
+  });
   const [form, setForm] = useState({ name:'', contact:'', title:'', description:'', location:'', mediaUrl:'', sourceUrl:'', consent:false });
   const [state, setState] = useState({ loading:false, error:'', success:false });
 
@@ -27,7 +34,7 @@ export default function SendNews() {
   }
 
   if (state.success) {
-    return <main><div className="shell form-page">
+    return <><JsonLd data={pageSchema} id="send-news-jsonld"/><JsonLd data={pageSchema} id="send-news-jsonld"/><main><div className="shell form-page">
       <div className="kicker">खबर प्राप्त हुई</div>
       <h1>धन्यवाद, आपकी खबर मिल गई।</h1>
       <p className="article-lead">आपकी जानकारी अभी प्रकाशित नहीं होगी। पहले हमारी संपादकीय टीम तथ्य और स्रोत की जांच करेगी।</p>
