@@ -279,3 +279,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 
+
+/* News portal refinements */
+.hero-copy p { margin: 8px 0 10px; color: rgba(255,255,255,0.9); max-width: 760px; font-size: 14px; }
+.source-note { margin: 20px 0; padding: 14px 16px; border-left: 4px solid var(--gold); background: #faf7f1; color: var(--muted); font-size: 13px; border-radius: 8px; }
+.card h2 { margin: 10px 0 8px; font-size: 1.3rem; line-height: 1.28; }
+.card .read { display: inline-block; margin-top: 10px; }
+.primary { text-decoration: none; }
+@media (max-width: 700px) { .hero-copy p { font-size: 13px; } .hero-copy h1 { font-size: 1.8rem; } }
