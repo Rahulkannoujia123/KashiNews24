@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { fetchFreshStories } from '../../lib/news';\nimport { searchArchivedStories } from '../../lib/archive';
+import { fetchFreshStories } from '../../lib/news';
+import { searchArchivedStories } from '../../lib/archive';
 
 export const metadata = { title: 'खबरें खोजें', description: 'शीर्षक, श्रेणी, कीवर्ड या स्थान से Kashi Live News 24 की खबरें खोजें।' };
 
