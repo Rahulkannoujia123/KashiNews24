@@ -1,0 +1,52 @@
+# Kashi Live News 24
+
+> Kashi Live News 24 is a Hindi digital news platform focused on Varanasi, Kashi and Banaras, covering local news, crime, traffic, education, jobs, sports, health, weather, politics and public information.
+
+The site presents a mix of original/community-reviewed reporting and clearly attributed summaries from external publishers and public sources. External stories should be read with the listed source attribution and original-source link.
+
+## Main pages
+
+- [Home](https://kashi-livenews24.vercel.app/): Latest Varanasi and Kashi news.
+- [Search](https://kashi-livenews24.vercel.app/search): Search the news index.
+- [News archive](https://kashi-livenews24.vercel.app/archive): Archived stories when available.
+- [About](https://kashi-livenews24.vercel.app/about): About Kashi Live News 24.
+- [Contact](https://kashi-livenews24.vercel.app/contact): Contact and news-tip information.
+- [Send news](https://kashi-livenews24.vercel.app/send-news): Submit a local news tip for editorial review.
+- [Editorial policy](https://kashi-livenews24.vercel.app/editorial-policy): Editorial and source-handling policy.
+- [Correction policy](https://kashi-livenews24.vercel.app/correction-policy): Corrections and factual-error policy.
+- [Privacy policy](https://kashi-livenews24.vercel.app/privacy-policy): Privacy information.
+- [Disclaimer](https://kashi-livenews24.vercel.app/disclaimer): News-feed and external-source disclaimer.
+- [Terms](https://kashi-livenews24.vercel.app/terms): Website usage terms.
+- [Advertising](https://kashi-livenews24.vercel.app/advertise): Advertising information.
+- [Social updates](https://kashi-livenews24.vercel.app/social): Publicly indexed Facebook and Instagram-related updates.
+
+## Coverage
+
+- Varanasi
+- Kashi
+- Crime
+- Traffic
+- Politics
+- Education
+- Business
+- Sports
+- Weather
+- Jobs
+- Health
+- Entertainment
+- Technology
+- Uttar Pradesh
+- India
+
+## Source handling
+
+- Prefer current, attributed source information.
+- External stories include source attribution where available.
+- User-submitted material is intended for editorial review before publication.
+- Time-sensitive public-safety, travel, weather and official information should be independently checked against the responsible authority when needed.
+
+## Machine-readable endpoints
+
+- [Sitemap](https://kashi-livenews24.vercel.app/sitemap.xml)
+- [Robots](https://kashi-livenews24.vercel.app/robots.txt)
+- [LLMs.txt](https://kashi-livenews24.vercel.app/llms.txt)
