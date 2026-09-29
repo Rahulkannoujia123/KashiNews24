@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import AdSlot from '../components/AdSlot';
 import { categoryLabel, fetchFreshStories, CATEGORY_OPTIONS, toCategoryRoute } from '../lib/news';
+import { fetchVaranasiSocialFeeds } from '../lib/social';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
 
@@ -60,7 +61,7 @@ function Footer() {
 }
 
 export default async function Home() {
-  const stories = await fetchFreshStories();
+  const [stories, socialFeeds] = await Promise.all([fetchFreshStories(), fetchVaranasiSocialFeeds()]);
   const breaking = stories.filter(s=>s.isBreaking || s.isFeatured);
   const featured = stories.find(s=>s.image) || stories[0];
   const secondary = stories.filter(s=>s.slug!==featured?.slug && s.image).slice(0,4);
@@ -99,6 +100,23 @@ export default async function Home() {
           </section>
 
           <Section title="वाराणसी खबरें" category="Varanasi" stories={stories.filter(s=>s.category==='Varanasi')}/>
+
+          {socialFeeds.length > 0 && <section className="story-section social-section">
+            <div className="section-head"><h2>सोशल मीडिया अपडेट</h2><span>Facebook · Reels</span></div>
+            <div className="news-grid">
+              {socialFeeds.slice(0, 6).map(item => <article className="card social-card" key={item.id}>
+                {item.image ? <a href={item.sourceUrl || '#'} target="_blank" rel="noreferrer">
+                  <Image src={item.image} alt={item.title} width={800} height={500} sizes="(max-width: 768px) 100vw, 33vw" loading="lazy"/>
+                </a> : null}
+                <div className="card-body">
+                  <div className="kicker">{item.type === 'reel' ? '🎬 Reel' : '📘 Facebook'} · {categoryLabel(item.category)}</div>
+                  <a href={item.sourceUrl || '#'} target="_blank" rel="noreferrer"><h3>{item.title}</h3></a>
+                  <p>{item.excerpt}</p>
+                  <div className="meta">{item.publishedAt} · स्रोत: {item.source}{item.likes ? ` · ❤️ ${item.likes}` : ''}</div>
+                </div>
+              </article>)}
+            </div>
+          </section>}
           <Section title="काशी खबरें" category="Kashi" stories={stories.filter(s=>s.category==='Kashi')}/>
           {categorySections.map(c=><Section key={c} title={`${categoryLabel(c)} खबरें`} category={c} stories={stories.filter(s=>s.category===c)}/>)}
 
