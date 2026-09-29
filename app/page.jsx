@@ -4,6 +4,7 @@ import AdSlot from '../components/AdSlot';
 import { categoryLabel, fetchFreshStories, CATEGORY_OPTIONS, toCategoryRoute } from '../lib/news';
 import { fetchVaranasiSocialFeeds } from '../lib/social';
 import SocialLinks from '../components/SocialLinks';
+import { JsonLd, createWebPageSchema } from '../components/JsonLd';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
 
@@ -71,7 +72,10 @@ export default async function Home() {
   const areas = ['Cantt','Lanka','BHU','Sigra','Bhelupur','Shivpur','Rohania','Sarnath','Ramnagar','Pindra','Sevapuri'];
   const categorySections = CATEGORY_OPTIONS.filter(c=>!['Varanasi','Kashi'].includes(c));
 
+  const pageSchema = createWebPageSchema({ url: siteUrl, name: 'Kashi Live News 24 | वाराणसी की ताज़ा खबरें', description: 'वाराणसी, काशी और बनारस की ताज़ा स्थानीय खबरें, अपराध, शिक्षा, खेल, रोजगार, मौसम और उत्तर प्रदेश अपडेट।' });
+
   return <>
+    <JsonLd data={pageSchema} id="homepage-jsonld"/>
     <Header breaking={breaking}/>
     <main className="page-shell">
       <div className="shell page-body">
