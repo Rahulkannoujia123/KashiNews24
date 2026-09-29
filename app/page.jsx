@@ -3,6 +3,7 @@ import Image from 'next/image';
 import AdSlot from '../components/AdSlot';
 import { categoryLabel, fetchFreshStories, CATEGORY_OPTIONS, toCategoryRoute } from '../lib/news';
 import { fetchVaranasiSocialFeeds } from '../lib/social';
+import SocialLinks from '../components/SocialLinks';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
 
@@ -131,6 +132,7 @@ export default async function Home() {
         </aside>
       </div>
     </main>
+    <SocialLinks/>
     <Footer/>
   </>;
 }
