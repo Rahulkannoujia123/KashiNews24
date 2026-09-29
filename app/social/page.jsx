@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { fetchVaranasiSocialFeeds } from '../../lib/social';
 import { categoryLabel } from '../../lib/news';
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 
 export const metadata = {
   title: 'वाराणसी सोशल मीडिया अपडेट',
@@ -9,7 +10,13 @@ export const metadata = {
 
 export default async function SocialPage() {
   const feeds = await fetchVaranasiSocialFeeds();
-  return <>
+  const pageSchema = createWebPageSchema({
+    url: 'https://kashi-livenews24.vercel.app/social',
+    name: 'वाराणसी सोशल मीडिया अपडेट | Kashi Live News 24',
+    description: 'वाराणसी, काशी और बनारस से जुड़े सार्वजनिक रूप से खोजे गए Facebook और Instagram अपडेट।',
+    type: 'CollectionPage'
+  });
+  return <><JsonLd data={pageSchema} id="social-jsonld"/>
     <header className="masthead"><div className="shell masthead-row">
       <Link href="/" className="brand"><span className="brand-mark">क</span><span className="brand-name">KASHI LIVE NEWS 24<span>VARANASI | KASHI | BANARAS</span></span></Link>
       <Link href="/" className="icon-btn" aria-label="Home">⌂</Link>
