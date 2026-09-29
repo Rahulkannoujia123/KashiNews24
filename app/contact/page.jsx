@@ -1,3 +1,4 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 import Link from 'next/link';
 
 export const metadata = {
@@ -6,7 +7,8 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/contact', name: 'संपर्क करें | Kashi Live News 24', description: 'Kashi Live News 24 से संपर्क करने और स्थानीय खबर भेजने की जानकारी।', type: 'ContactPage' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Contact</div>
     <h1>संपर्क करें</h1>
     <p className="article-lead">खबर, सुधार, सुझाव या स्थानीय सूचना साझा करने के लिए हमारा ऑनलाइन submission form इस्तेमाल करें।</p>
