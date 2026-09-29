@@ -1,3 +1,4 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 import Link from 'next/link';
 
 export const metadata = {
@@ -6,7 +7,8 @@ export const metadata = {
 };
 
 export default function AboutPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/about', name: 'हमारे बारे में | Kashi Live News 24', description: 'Kashi Live News 24 के बारे में — वाराणसी, काशी और बनारस की स्थानीय हिंदी न्यूज़ वेबसाइट।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Kashi Live News 24</div>
     <h1>हमारे बारे में</h1>
     <p className="article-lead">Kashi Live News 24 वाराणसी, काशी और बनारस से जुड़ी स्थानीय खबरों, सार्वजनिक सूचनाओं और क्षेत्रीय अपडेट को हिंदी में पाठकों तक पहुंचाने वाला डिजिटल न्यूज़ प्लेटफॉर्म है।</p>
