@@ -44,9 +44,25 @@ export default function RootLayout({ children }) {
         <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />
         <link rel="describedby" href="/llms.txt" />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema).replace(/</g, '\u003c') }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'Kashi Live News 24',
+              url: siteUrl,
+              logo: `${siteUrl}/favicon.ico`,
+              sameAs: [
+                process.env.NEXT_PUBLIC_FACEBOOK_URL || 'https://www.facebook.com/profile.php?id=61576493290727',
+                process.env.NEXT_PUBLIC_INSTAGRAM_URL || 'https://www.instagram.com/kashilivenews24/'
+              ]
+            }).replace(/</g, '\u003c')
+          }}
+        />
       </head>
       <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema).replace(/</g, '\u003c') }} />
         <AutoRefresh />
         {children}
         <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`} crossOrigin="anonymous" />
