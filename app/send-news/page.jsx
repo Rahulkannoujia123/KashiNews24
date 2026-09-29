@@ -86,7 +86,7 @@ export default function SendNews() {
             <div>
               <div className="send-news-eyebrow">कम्युनिटी न्यूज़ डेस्क</div>
               <h1>हमें खबर भेजें</h1>
-              <p>वाराणसी में हुई खबर, फोटो, वीडियो या स्थानीय सूचना हमारे साथ साझा करें। हर submission पहले editorial review से गुजरेगा।</p>
+              <p>वाराणसी में हुई खबर, फोटो, वीडियो या स्थानीय सूचना हमारे साथ साझा करें। हर submission पहले editorial review से गुजरेगा। <strong>सही तारीख, स्थान और स्रोत जोड़ना मददगार रहेगा।</strong></p>
             </div>
             <div className="send-news-steps" aria-label="खबर भेजने की प्रक्रिया">
               <div className="send-news-step"><strong>01</strong><span>जानकारी भरें</span></div>
