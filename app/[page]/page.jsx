@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import InfoPage from '../info-page';
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 
 const pages = {
   about: ['About Kashi Live News 24', 'Kashi Live News 24 covers news and public information related to Varanasi, Kashi and Banaras. Stories shown on this site may come from external publishers; each external item should be read with its source attribution. Editorial ownership and staff details have not been provided in this project.'],
@@ -23,5 +24,11 @@ export async function generateMetadata({ params }) {
 export default async function InformationPage({ params }) {
   const { page } = await params;
   if (!pages[page]) notFound();
-  return <InfoPage slug={page} />;
+  const titles = { about: 'हमारे बारे में', contact: 'संपर्क', 'privacy-policy': 'गोपनीयता नीति', terms: 'उपयोग के नियम', disclaimer: 'अस्वीकरण', 'editorial-policy': 'संपादकीय नीति', 'correction-policy': 'सुधार नीति', advertise: 'विज्ञापन' };
+  const pageSchema = createWebPageSchema({
+    url: `https://kashi-livenews24.vercel.app/${page}`,
+    name: `${titles[page] || page} | Kashi Live News 24`,
+    description: 'Kashi Live News 24 की हिंदी जानकारी और नीतियां।'
+  });
+  return <><JsonLd data={pageSchema} id="dynamic-info-page-jsonld"/><InfoPage slug={page} />;
 }
