@@ -1,10 +1,12 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 export const metadata = {
   title: 'गोपनीयता नीति',
   description: 'Kashi Live News 24 की गोपनीयता और कुकी नीति।'
 };
 
 export default function PrivacyPolicyPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/privacy-policy', name: 'गोपनीयता नीति | Kashi Live News 24', description: 'Kashi Live News 24 की गोपनीयता और कुकी नीति।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Privacy</div>
     <h1>गोपनीयता नीति</h1>
     <p className="article-lead">यह नीति बताती है कि Kashi Live News 24 वेबसाइट पर आने वाले उपयोगकर्ताओं की जानकारी के संबंध में हमारी सामान्य प्रक्रिया क्या है।</p>
