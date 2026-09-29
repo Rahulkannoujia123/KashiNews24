@@ -1,10 +1,12 @@
+import { JsonLd, createWebPageSchema } from '../../components/JsonLd';
 export const metadata = {
   title: 'संपादकीय नीति',
   description: 'Kashi Live News 24 की समाचार प्रकाशन और संपादकीय नीति।'
 };
 
 export default function EditorialPolicyPage() {
-  return <main className="page-shell"><div className="shell form-page">
+  const pageSchema = createWebPageSchema({ url: 'https://kashi-livenews24.vercel.app/editorial-policy', name: 'संपादकीय नीति | Kashi Live News 24', description: 'Kashi Live News 24 की समाचार प्रकाशन और संपादकीय नीति।' });
+  return <><JsonLd data={pageSchema} id="page-jsonld"/><main className="page-shell"><div className="shell form-page">
     <div className="kicker">Editorial Policy</div>
     <h1>संपादकीय नीति</h1>
     <p className="article-lead">हमारा लक्ष्य स्थानीय समाचारों को स्रोत, संदर्भ और उपलब्ध तथ्यों के साथ स्पष्ट रूप में प्रस्तुत करना है।</p>
