@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { categoryFromSlug, categoryLabel, fetchFreshStories, normalizeCategory, toCategoryRoute } from '../../../lib/news';
+import { JsonLd, createWebPageSchema, createBreadcrumbSchema } from '../../../components/JsonLd';
 
 const siteUrl=process.env.NEXT_PUBLIC_SITE_URL||'https://kashi-livenews24.vercel.app';
 
@@ -20,7 +21,18 @@ export default async function CategoryPage({params}){
   const {slug}=await params; const category=categoryFromSlug(slug)||normalizeCategory(slug)||'';
   if(!category)notFound();
   const stories=await fetchFreshStories(category);
-  return <><Header/><main className="page-shell"><div className="shell page-body"><div className="content-column">
+  const pageUrl = `${siteUrl}/category/${slug}`;
+  const pageSchema = createWebPageSchema({
+    url: pageUrl,
+    name: `${categoryLabel(category)} खबरें | Kashi Live News 24`,
+    description: `${categoryLabel(category)} की ताज़ा खबरें और वाराणसी-काशी की लाइव कवरेज।`,
+    type: 'CollectionPage'
+  });
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'होम', url: siteUrl },
+    { name: categoryLabel(category), url: pageUrl }
+  ]);
+  return <><JsonLd data={pageSchema} id="category-jsonld"/><JsonLd data={breadcrumbSchema} id="category-breadcrumb-jsonld"/><Header/><main className="page-shell"><div className="shell page-body"><div className="content-column">
     <div className="news-utility-bar"><span>वाराणसी • काशी • बनारस</span><span>{categoryLabel(category)} कवरेज</span><span>अपडेटेड लाइव फीड</span></div>
     <section className="story-section"><div className="section-head"><h1>{categoryLabel(category)} खबरें</h1><Link href="/">← होम</Link></div>
       {stories.length?<div className="news-grid">{stories.map(story=><article className="card" key={story.slug}>{story.image?<Link href={'/news/'+story.slug}><Image src={story.image} alt={story.imageAlt||story.title} width={800} height={500} sizes="(max-width:768px) 100vw, 33vw"/></Link>:null}<div className="card-body"><div className="kicker">{categoryLabel(story.category)} · {story.location==='Varanasi'?'वाराणसी':story.location}</div><Link href={'/news/'+story.slug}><h2>{story.title}</h2></Link><p>{story.excerpt}</p><div className="meta">{story.publishedAt} · {story.isOriginal?'Kashi Live News 24':'स्रोत: '+(story.source||'बाहरी प्रकाशक')}</div><Link className="read" href={'/news/'+story.slug}>पूरी खबर →</Link></div></article>)}</div>:<div className="empty"><p>आज इस श्रेणी की सत्यापित खबर उपलब्ध नहीं है।</p><Link className="primary" href="/">दूसरी खबरें देखें</Link></div>}
