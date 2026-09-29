@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { areas, categoryLabel, fetchFreshStories } from '../../../lib/news';
+import { JsonLd, createWebPageSchema, createBreadcrumbSchema } from '../../../components/JsonLd';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://kashi-livenews24.vercel.app';
 
@@ -27,12 +28,24 @@ export default async function LocationPage({ params }) {
 
   const stories = await fetchFreshStories();
   const term = area.toLocaleLowerCase('hi-IN');
+  const pageUrl = `${siteUrl}/location/${slug}`;
+  const pageSchema = createWebPageSchema({
+    url: pageUrl,
+    name: `${area} की लोकल खबरें | Kashi Live News 24`,
+    description: `${area}, वाराणसी की ताज़ा स्थानीय खबरें और अपडेट।`,
+    type: 'CollectionPage'
+  });
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'होम', url: siteUrl },
+    { name: area, url: pageUrl }
+  ]);
+
   const results = stories.filter((story) =>
     [story.title, story.excerpt, story.content, ...(story.tags || [])]
       .filter(Boolean).join(' ').toLocaleLowerCase('hi-IN').includes(term)
   );
 
-  return <>
+  return <><JsonLd data={pageSchema} id="location-jsonld"/><JsonLd data={breadcrumbSchema} id="location-breadcrumb-jsonld"/>
     <header className="masthead">
       <div className="shell masthead-row">
         <Link href="/" className="brand"><span className="brand-mark">क</span><span className="brand-name">KASHI LIVE NEWS 24<span>VARANASI | KASHI | BANARAS</span></span></Link>
